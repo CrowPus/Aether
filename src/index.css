@@ -149,39 +149,6 @@ input[type="range"] {
   }
 }
 
-/* Non-blocking architectural HUD telemetry pill for initial arrival status */
-div[role="status"].fixed.inset-0.z-50 {
-  inset: auto 1.5rem 1.5rem auto !important;
-  width: auto !important;
-  max-width: min(24rem, calc(100vw - 2rem)) !important;
-  padding: 0.875rem 1.25rem !important;
-  background-color: rgba(20, 25, 23, 0.94) !important;
-  border: 1px solid rgba(196, 167, 124, 0.38) !important;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.72) !important;
-  align-items: flex-start !important;
-}
-
-div[role="status"].fixed.inset-0.z-50 > p:first-of-type {
-  font-size: 9px !important;
-  margin-bottom: 0.25rem !important;
-}
-
-div[role="status"].fixed.inset-0.z-50 > p:nth-of-type(2) {
-  font-size: 1.25rem !important;
-  line-height: 1.1 !important;
-}
-
-div[role="status"].fixed.inset-0.z-50 > p:nth-of-type(3) {
-  margin-top: 0.25rem !important;
-  font-size: 10px !important;
-}
-
-div[role="status"].fixed.inset-0.z-50 > button {
-  margin-top: 0.625rem !important;
-  padding: 0.375rem 0.75rem !important;
-  min-height: 32px !important;
-}
-
 /* Focus visibility per WCAG 2.2 AA */
 *:focus-visible {
   outline: 2px solid #c4a77c;

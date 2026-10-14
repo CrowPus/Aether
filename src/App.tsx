@@ -37,7 +37,7 @@ const EASE_EDITORIAL: [number, number, number, number] = [0.22, 1, 0.36, 1];
 export default function App() {
   const reduceMotion = useReducedMotion();
 
-  const [entryDismissed, setEntryDismissed] = useState(false);
+  const [entryDismissed, setEntryDismissed] = useState(true);
   const [selectedProject, setSelectedProject] = useState<ProjectSpec>(PROJECTS[0]);
   const [modalProject, setModalProject] = useState<ProjectSpec | null>(null);
   const [activeMaterial, setActiveMaterial] = useState<MaterialSwatch>(MATERIALS[0]);

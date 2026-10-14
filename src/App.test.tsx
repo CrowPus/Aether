@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 import {
@@ -11,6 +11,13 @@ import {
 } from "./lib/utils";
 
 describe("AETHER — Architecture Beyond Earth", () => {
+  const dismissPreludeIfPresent = () => {
+    const enterBtn = screen.queryByRole("button", { name: /enter immediately/i });
+    if (enterBtn) {
+      fireEvent.click(enterBtn);
+    }
+  };
+
   it("renders the primary brand mark, chapter navigation, and dismisses the prelude", () => {
     render(<App />);
 
@@ -18,10 +25,7 @@ describe("AETHER — Architecture Beyond Earth", () => {
     const brandMarks = screen.getAllByText("AETHER");
     expect(brandMarks.length).toBeGreaterThan(0);
 
-    // Dismiss the prelude
-    const enterBtn = screen.getByRole("button", { name: /enter immediately/i });
-    expect(enterBtn).toBeInTheDocument();
-    fireEvent.click(enterBtn);
+    dismissPreludeIfPresent();
 
     // Navigation links in header
     expect(screen.getByRole("link", { name: /reveal/i })).toBeInTheDocument();
@@ -36,7 +40,7 @@ describe("AETHER — Architecture Beyond Earth", () => {
 
   it("renders all signature architectural residences with structural telemetry", () => {
     render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    dismissPreludeIfPresent();
 
     // Chapter 04 signature residence codes
     expect(screen.getAllByText("AE—01").length).toBeGreaterThan(0);
@@ -51,7 +55,7 @@ describe("AETHER — Architecture Beyond Earth", () => {
 
   it("renders the material palette swatches and allows interactive inspection", () => {
     render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    dismissPreludeIfPresent();
 
     const limestoneElements = screen.getAllByText("Honed Jura Limestone");
     expect(limestoneElements.length).toBeGreaterThan(0);
@@ -69,7 +73,7 @@ describe("AETHER — Architecture Beyond Earth", () => {
 
   it("renders interior viewpoints in Chapter 05 and updates active viewpoint", () => {
     render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    dismissPreludeIfPresent();
 
     const vp1Btn = screen.getByRole("button", {
       name: /VP—01/i,
@@ -85,8 +89,8 @@ describe("AETHER — Architecture Beyond Earth", () => {
   });
 
   it("validates private commission inquiry form and handles complete submission", () => {
-    render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    const { container } = render(<App />);
+    dismissPreludeIfPresent();
 
     const submitBtn = screen.getByRole("button", {
       name: /transmit encrypted brief/i,
@@ -125,13 +129,13 @@ describe("AETHER — Architecture Beyond Earth", () => {
 
     // Verify confirmation
     expect(
-      screen.getByText(/Inquiry Transmitted to Atelier Partners/i)
+      screen.getByText(/Your site brief has been logged/i)
     ).toBeInTheDocument();
   });
 
   it("filters project explorer by landscape typology", () => {
     render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    dismissPreludeIfPresent();
 
     const desertFilterBtn = screen.getByRole("button", { name: /^desert$/i });
     expect(desertFilterBtn).toBeInTheDocument();
@@ -145,7 +149,7 @@ describe("AETHER — Architecture Beyond Earth", () => {
 
   it("allows opening and closing the project architectural dossier modal", () => {
     render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    dismissPreludeIfPresent();
 
     const inspectButtons = screen.getAllByRole("button", {
       name: /inspect dossier/i,
@@ -170,7 +174,7 @@ describe("AETHER — Architecture Beyond Earth", () => {
 
   it("toggles the audio state when sound button is clicked", () => {
     render(<App />);
-    fireEvent.click(screen.getByRole("button", { name: /enter immediately/i }));
+    dismissPreludeIfPresent();
 
     const soundBtn = screen.getByRole("button", {
       name: /ambient architectural sound/i,
