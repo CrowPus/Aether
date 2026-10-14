@@ -27,7 +27,6 @@ import {
   VIEWPOINTS,
   CHAPTERS,
   JOURNAL_ENTRIES,
-  drawArchitectureFrame,
   type ProjectSpec,
   type MaterialSwatch,
   type InteriorViewpoint,
@@ -59,7 +58,6 @@ export default function App() {
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; notes?: string }>({});
   const [commissionSubmitted, setCommissionSubmitted] = useState(false);
 
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerRef = useRef({ x: 0, y: 0 });
   const scrollRef = useRef(0);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -127,48 +125,6 @@ export default function App() {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Persistent 3D Architectural Canvas loop
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let rafId = 0;
-    const startTime = performance.now();
-
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(window.innerWidth * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const render = (now: number) => {
-      const elapsed = reduceMotion ? 0 : (now - startTime) / 1000;
-      drawArchitectureFrame(ctx, window.innerWidth, window.innerHeight, {
-        scrollProgress: scrollRef.current,
-        pointerX: pointerRef.current.x,
-        pointerY: pointerRef.current.y,
-        solarHour,
-        activeMaterial,
-        activeViewpoint,
-        activeProject: selectedProject,
-        wireframeRatio,
-        timeSec: elapsed,
-      });
-      rafId = window.requestAnimationFrame(render);
-    };
-
-    rafId = window.requestAnimationFrame(render);
-    return () => {
-      window.cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", resize);
-    };
-  }, [solarHour, activeMaterial, activeViewpoint, selectedProject, wireframeRatio, reduceMotion]);
 
   // Procedural Web Audio ambient acoustic drone (muted by default, user-initiated)
   const toggleAmbientSound = () => {
@@ -298,15 +254,29 @@ export default function App() {
         </div>
       )}
 
-      {/* Persistent Interactive 3D Architectural Canvas ("The Building is the Interface") */}
+      {/* Persistent Ambient Looping Architectural Video Backdrop */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <canvas
-          ref={canvasRef}
-          aria-hidden="true"
-          className="h-full w-full object-cover opacity-90"
-        />
-        <div className="aether-grid-bg absolute inset-0 opacity-45" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0E1110]/55 via-transparent to-[#0E1110]/90" />
+        {reduceMotion ? (
+          <img
+            src="/media/hero.webp"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none h-full w-full object-cover opacity-80"
+          />
+        ) : (
+          <video
+            src="/media/hero.mp4"
+            poster="/media/hero.webp"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            className="pointer-events-none h-full w-full object-cover opacity-80"
+          />
+        )}
+        <div className="aether-grid-bg pointer-events-none absolute inset-0 opacity-35" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0E1110]/60 via-[#0E1110]/35 to-[#0E1110]/90" />
       </div>
 
       {/* Persistent Architectural Navigation Header */}
