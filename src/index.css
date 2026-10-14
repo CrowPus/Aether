@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Mineral & Tectonic Core Palette */
+  --color-obsidian: #0e1110;
+  --color-obsidian-elevated: #141917;
+  --color-obsidian-surface: #181f1d;
+  --color-limestone: #e8e1d5;
+  --color-limestone-muted: #cfc6b6;
+  --color-titanium: #9ea5a1;
+  --color-titanium-dim: #666e6a;
+  --color-champagne: #c4a77c;
+  --color-champagne-bright: #d9be94;
+
+  /* Semantic Roles per DESIGN.md */
+  --color-bg: #0e1110;
+  --color-surface: #141917;
+  --color-surface-raised: #181f1d;
+  --color-border: rgba(232, 225, 213, 0.12);
+  --color-border-strong: rgba(232, 225, 213, 0.28);
+  --color-fg: #e8e1d5;
+  --color-fg-muted: #9ea5a1;
+  --color-primary: #e8e1d5;
+  --color-primary-fg: #0e1110;
+  --color-accent: #c4a77c;
+  --color-success: #7ba68a;
+  --color-warning: #d4a359;
+  --color-danger: #e07a6a;
+  --color-focus-ring: #c4a77c;
+
+  /* Legacy aliases for compatibility */
+  --color-canvas: #0e1110;
+  --color-ink: #e8e1d5;
+  --color-muted: #9ea5a1;
+  --color-line: rgba(232, 225, 213, 0.12);
+  --color-line-strong: rgba(232, 225, 213, 0.28);
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+:root,
+html,
+html.dark {
+  color-scheme: dark;
+  --color-bg: #0e1110;
+  --color-surface: #141917;
+  --color-surface-raised: #181f1d;
+  --color-fg: #e8e1d5;
+  --color-fg-muted: #9ea5a1;
+  --color-canvas: #0e1110;
+  --color-ink: #e8e1d5;
+  --color-muted: #9ea5a1;
+}
+
+html {
+  background-color: #0e1110;
+  color: #e8e1d5;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(196, 167, 124, 0.2);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #0e1110;
+  color: #e8e1d5;
+  overflow-x: hidden;
+  selection-background-color: rgba(196, 167, 124, 0.28);
+}
+
+::selection {
+  background-color: rgba(196, 167, 124, 0.28);
+  color: #e8e1d5;
+}
+
+/* Typography Role Utilities */
+.font-display {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.font-sans-body {
+  font-family: var(--font-sans);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  scroll-margin-top: 5.5rem;
+  text-wrap: balance;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Subtle architectural datum grid background */
+.aether-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(232, 225, 213, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(232, 225, 213, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Interactive Touch & Target Discipline */
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/* Native dark-mode select & form control fidelity */
+select,
+select option {
+  background-color: #0e1110;
+  color: #e8e1d5;
+}
+
+input[type="range"] {
+  min-height: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  input:not([type="range"]),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Non-blocking architectural HUD telemetry pill for initial arrival status */
+div[role="status"].fixed.inset-0.z-50 {
+  inset: auto 1.5rem 1.5rem auto !important;
+  width: auto !important;
+  max-width: min(24rem, calc(100vw - 2rem)) !important;
+  padding: 0.875rem 1.25rem !important;
+  background-color: rgba(20, 25, 23, 0.94) !important;
+  border: 1px solid rgba(196, 167, 124, 0.38) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.72) !important;
+  align-items: flex-start !important;
+}
+
+div[role="status"].fixed.inset-0.z-50 > p:first-of-type {
+  font-size: 9px !important;
+  margin-bottom: 0.25rem !important;
+}
+
+div[role="status"].fixed.inset-0.z-50 > p:nth-of-type(2) {
+  font-size: 1.25rem !important;
+  line-height: 1.1 !important;
+}
+
+div[role="status"].fixed.inset-0.z-50 > p:nth-of-type(3) {
+  margin-top: 0.25rem !important;
+  font-size: 10px !important;
+}
+
+div[role="status"].fixed.inset-0.z-50 > button {
+  margin-top: 0.625rem !important;
+  padding: 0.375rem 0.75rem !important;
+  min-height: 32px !important;
+}
+
+/* Focus visibility per WCAG 2.2 AA */
+*:focus-visible {
+  outline: 2px solid #c4a77c;
+  outline-offset: 3px;
+}
+
+/* Modal overscroll containment */
+div[role="dialog"] {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

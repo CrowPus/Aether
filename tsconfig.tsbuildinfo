@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/components/motion/animated-group.tsx","./src/components/motion/animated-number.tsx","./src/components/motion/in-view.tsx","./src/components/motion/scroll-progress.tsx","./src/components/motion/spotlight.tsx","./src/components/motion/text-effect.tsx","./src/components/motion/tilt.tsx","./src/lib/utils.ts"],"version":"5.9.3"}
